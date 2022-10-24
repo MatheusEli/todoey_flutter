@@ -1,14 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:todoey_flutter/screens/add_task_screen.dart';
+import 'package:todoey_flutter/widgets/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
+
+  // Widget buildBottomSheet(BuildContext context) {
+  //   return Container(
+  //     height: 300.0,
+  //     decoration: const BoxDecoration(
+  //       borderRadius: BorderRadius.only(
+  //         topRight: Radius.circular(25.0),
+  //         topLeft: Radius.circular(25.0),
+  //       ),
+  //     ),
+  //     child: const Text('Hello World!'),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => const AddTaskScreen(),
+          );
+        },
         backgroundColor: Colors.lightBlueAccent,
         child: const Icon(Icons.add),
       ),
@@ -52,6 +72,7 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -59,6 +80,7 @@ class TasksScreen extends StatelessWidget {
                   topRight: Radius.circular(25.0),
                 ),
               ),
+              child: TasksList(),
             ),
           )
         ],
