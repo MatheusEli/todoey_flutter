@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:todoey_flutter/screens/add_task_screen.dart';
 import 'package:todoey_flutter/widgets/tasks_list.dart';
+import '../models/task.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
   const TasksScreen({Key? key}) : super(key: key);
 
-  // Widget buildBottomSheet(BuildContext context) {
-  //   return Container(
-  //     height: 300.0,
-  //     decoration: const BoxDecoration(
-  //       borderRadius: BorderRadius.only(
-  //         topRight: Radius.circular(25.0),
-  //         topLeft: Radius.circular(25.0),
-  //       ),
-  //     ),
-  //     child: const Text('Hello World!'),
-  //   );
-  // }
+  @override
+  State<TasksScreen> createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  TasksList list = TasksList();
+
+  addTask(Task newTask) {
+    setState(() {
+      list.addTask(newTask);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class TasksScreen extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => const AddTaskScreen(),
+            builder: (context) => AddTaskScreen(addTask),
           );
         },
         backgroundColor: Colors.lightBlueAccent,
@@ -56,9 +57,10 @@ class TasksScreen extends StatelessWidget {
                 Text(
                   'Todoey',
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 50.0),
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 50.0,
+                  ),
                 ),
                 Text(
                   '12 Tasks',
