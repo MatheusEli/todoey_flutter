@@ -11,12 +11,12 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  TasksList list = TasksList();
-
+  List<Task> tasks = [];
   addTask(Task newTask) {
     setState(() {
-      list.addTask(newTask);
+      tasks.add(newTask);
     });
+    Navigator.pop(context);
   }
 
   @override
@@ -41,8 +41,8 @@ class _TasksScreenState extends State<TasksScreen> {
                 top: 60.0, left: 30.0, right: 30.0, bottom: 30.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                CircleAvatar(
+              children: [
+                const CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30.0,
                   child: Icon(
@@ -51,10 +51,10 @@ class _TasksScreenState extends State<TasksScreen> {
                     color: Colors.lightBlueAccent,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10.0,
                 ),
-                Text(
+                const Text(
                   'Todoey',
                   style: TextStyle(
                     color: Colors.white,
@@ -63,10 +63,10 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '12 Tasks',
-                  style: TextStyle(color: Colors.white, fontSize: 20.0),
+                  '${tasks.length} Tasks',
+                  style: const TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10.0,
                 ),
               ],
@@ -82,7 +82,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   topRight: Radius.circular(25.0),
                 ),
               ),
-              child: TasksList(),
+              child: TasksList(tasks),
             ),
           )
         ],
