@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey_flutter/screens/task_screen.dart';
 
-import 'models/task.dart';
+import 'models/task_data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,25 +13,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<Data>(
-      create: (context) => Data(),
+    return ChangeNotifierProvider<TaskData>(
+      create: (context) => TaskData(),
       child: MaterialApp(
         home: TasksScreen(),
       ),
     );
-  }
-}
-
-class Data extends ChangeNotifier {
-  List<Task> tasks = [];
-
-  void addTask(Task newTask) {
-    tasks.add(newTask);
-    notifyListeners();
-  }
-
-  void toggleIsDone(index) {
-    tasks[index].isDone = !tasks[index].isDone;
-    notifyListeners();
   }
 }
